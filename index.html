@@ -134,12 +134,15 @@ main{overflow-x:clip}
 .hero{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;color:var(--satin)}
 .hero.saliendo{-webkit-mask-image:linear-gradient(to top,transparent calc(var(--sale,0)*140% - 40%),#000 calc(var(--sale,0)*140%));mask-image:linear-gradient(to top,transparent calc(var(--sale,0)*140% - 40%),#000 calc(var(--sale,0)*140%))}
 .hero.ida{visibility:hidden}
-.paneles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);background:#2a0f18}
+/* La columna central es un poco mas ancha: asi cabe la persona completa del video, sin zoom. */
+.paneles{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1.12fr 1fr;background:#2a0f18}
 .panel{position:relative;overflow:hidden}
 .panel video{width:100%;height:100%;object-fit:cover;object-position:50% 22%;animation:subir 1.3s var(--suave) both}
-.panel:nth-child(1) video{object-position:50% 6%}
-.panel:nth-child(2) video{object-position:50% 50%;animation-delay:.1s}
-.panel:nth-child(3) video{animation-delay:.2s}
+/* Izquierda: encuadre corrido para que la cara quede centrada. Derecha: centrado en la novia. */
+.panel:nth-child(1) video{object-position:78% 6%}
+/* El ancla arriba evita cortar la cabeza en pantallas bajas de portatil. */
+.panel:nth-child(2) video{object-position:50% 8%;animation-delay:.1s}
+.panel:nth-child(3) video{object-position:62% 10%;animation-delay:.2s}
 @keyframes subir{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
 /* Sombra arriba para que se lea el menu. */
 .hero::before{content:"";position:absolute;inset:0 0 auto 0;height:22%;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(42,15,24,.5),rgba(42,15,24,0))}
@@ -148,10 +151,10 @@ main{overflow-x:clip}
   linear-gradient(to top,rgba(58,18,32,.88) 0,rgba(58,18,32,.5) 30%,rgba(58,18,32,0) 58%)}
 /* En computador el velo se aclara hacia la derecha: el nombre se lee y el vestido luce. */
 @media (min-width:900px){
-  .velo{-webkit-mask-image:linear-gradient(to right,#000 0,#000 34%,rgba(0,0,0,.28) 56%,rgba(0,0,0,.28) 100%);mask-image:linear-gradient(to right,#000 0,#000 34%,rgba(0,0,0,.28) 56%,rgba(0,0,0,.28) 100%)}
+  .velo{-webkit-mask-image:linear-gradient(to right,#000 0,#000 40%,rgba(0,0,0,.24) 66%,rgba(0,0,0,.24) 100%);mask-image:linear-gradient(to right,#000 0,#000 40%,rgba(0,0,0,.24) 66%,rgba(0,0,0,.24) 100%)}
 }
 .hero-texto{position:absolute;left:var(--margen);right:var(--margen);bottom:clamp(24px,6svh,64px)}
-.hero h1{font:400 min(11.2vw,25svh)/.86 var(--guion);text-shadow:0 2px 30px rgba(42,15,24,.45)}
+.hero h1{font:400 min(10vw,23svh)/.86 var(--guion);text-shadow:0 2px 30px rgba(42,15,24,.55)}
 .hero h1 .linea{display:block;overflow:hidden;padding:.2em .3em .16em;margin:-.2em -.3em -.16em}
 .hero h1 .linea>span{display:block;animation:aparecer 1.2s var(--suave) .35s both}
 .hero h1 .linea:nth-child(2)>span{animation-delay:.47s;margin-left:.42em}
@@ -417,8 +420,8 @@ html:not(.js) .manifiesto{background:var(--satin)}
   <header class="hero" id="inicio">
     <div class="paneles" aria-hidden="true">
       <div class="panel"><video muted loop playsinline preload="none" poster="assets/img/poster-hero-velo.jpg" data-src="assets/video/hero-velo.mp4"></video></div>
-      <div class="panel"><video muted loop playsinline preload="none" poster="assets/img/poster-hero-novia.jpg" data-src="assets/video/hero-novia.mp4"></video></div>
       <div class="panel"><video muted loop playsinline preload="none" poster="assets/img/poster-hero-peinado.jpg" data-src="assets/video/hero-peinado.mp4"></video></div>
+      <div class="panel"><video muted loop playsinline preload="none" poster="assets/img/poster-hero-novia.jpg" data-src="assets/video/hero-novia.mp4"></video></div>
     </div>
     <div class="velo" aria-hidden="true"></div>
     <div class="hero-texto">
